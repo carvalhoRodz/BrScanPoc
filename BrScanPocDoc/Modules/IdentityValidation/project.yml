@@ -1,0 +1,35 @@
+name: IdentityValidation
+
+options:
+  xcodeVersion: '9999'
+
+configs:
+  Debug: debug
+  Release: release
+configFiles:
+  Debug: Configs/Debug.xcconfig
+  Release: Configs/Release.xcconfig
+  
+targets:
+  IdentityValidation:
+    type: framework
+    platform: iOS
+    settings:
+      IPHONEOS_DEPLOYMENT_TARGET: 12.1
+
+    sources:
+      - path: IdentityValidation
+
+  IdentityValidationTests:
+    type: bundle.unit-test
+    platform: iOS
+      
+    configFiles:
+      Debug: Configs/UnitTests.xcconfig
+
+    sources:
+      - path: IdentityValidationTests
+
+    dependencies:
+      - target: IdentityValidation
+    

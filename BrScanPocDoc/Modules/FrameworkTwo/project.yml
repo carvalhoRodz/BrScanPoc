@@ -1,0 +1,35 @@
+name: FrameworkTwo
+
+options:
+  xcodeVersion: '9999'
+
+configs:
+  Debug: debug
+  Release: release
+configFiles:
+  Debug: Configs/Debug.xcconfig
+  Release: Configs/Release.xcconfig
+  
+targets:
+  FrameworkTwo:
+    type: framework
+    platform: iOS
+    settings:
+      IPHONEOS_DEPLOYMENT_TARGET: 12.1
+
+    sources:
+      - path: FrameworkTwo
+
+  FrameworkTwoTests:
+    type: bundle.unit-test
+    platform: iOS
+      
+    configFiles:
+      Debug: Configs/UnitTests.xcconfig
+
+    sources:
+      - path: FrameworkTwoTests
+
+    dependencies:
+      - target: FrameworkTwo
+    

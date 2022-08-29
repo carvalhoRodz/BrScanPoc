@@ -1,0 +1,55 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '12.1'
+use_frameworks!
+
+workspace 'PocDoc.xcworkspace'
+
+target 'PocDoc' do
+  project 'PocDoc/PocDoc.project'
+  
+  pod 'brscan-sdk-documento-ios', '1.8.0'
+end
+
+target 'FrameworkOne' do
+  project 'Modules/FrameworkOne/FrameworkOne.project'
+  
+  target 'FrameworkOneTests' do
+    inherit! :search_paths
+  end
+end
+
+target 'FrameworkTwo' do
+  project 'Modules/FrameworkTwo/FrameworkTwo.project'
+  
+  target 'FrameworkTwoTests' do
+    inherit! :search_paths
+  end
+end
+
+target 'FrameworkThree' do
+  project 'Modules/FrameworkThree/FrameworkThree.project'
+  pod 'brscan-sdk-documento-ios', '1.8.0'
+  
+  target 'FrameworkThreeTests' do
+    inherit! :search_paths
+  end
+end
+
+target 'IdentityValidation' do
+  project 'Modules/IdentityValidation/IdentityValidation.project'
+  pod 'brscan-sdk-documento-ios', '1.8.0'
+  
+  target 'IdentityValidationTests' do
+    inherit! :search_paths
+    pod 'brscan-sdk-documento-ios', '1.8.0'
+  end
+end
+
+post_install do |installer|
+  puts "Fix for simulatoris on M1"
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+    end
+  end
+end

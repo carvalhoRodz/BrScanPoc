@@ -1,0 +1,39 @@
+name: FrameworkThree
+
+options:
+  xcodeVersion: '9999'
+
+configs:
+  Debug: debug
+  Release: release
+configFiles:
+  Debug: Configs/Debug.xcconfig
+  Release: Configs/Release.xcconfig
+  
+targets:
+  FrameworkThree:
+    type: framework
+    platform: iOS
+    settings:
+      IPHONEOS_DEPLOYMENT_TARGET: 12.1
+
+    sources:
+      - path: FrameworkThree
+    
+    dependencies:
+      - framework: IdentityValidation.framework
+        implicit: true
+
+  FrameworkThreeTests:
+    type: bundle.unit-test
+    platform: iOS
+      
+    configFiles:
+      Debug: Configs/UnitTests.xcconfig
+
+    sources:
+      - path: FrameworkThreeTests
+
+    dependencies:
+      - target: FrameworkThree
+    

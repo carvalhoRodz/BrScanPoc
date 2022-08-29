@@ -1,0 +1,39 @@
+name: FrameworkOne
+
+options:
+  xcodeVersion: '9999'
+
+configs:
+  Debug: debug
+  Release: release
+configFiles:
+  Debug: Configs/Debug.xcconfig
+  Release: Configs/Release.xcconfig
+  
+targets:
+  FrameworkOne:
+    type: framework
+    platform: iOS
+    settings:
+      IPHONEOS_DEPLOYMENT_TARGET: 12.1
+
+    sources:
+      - path: FrameworkOne
+    
+    dependencies:
+      - framework: IdentityValidation.framework
+        implicit: true
+
+  FrameworkOneTests:
+    type: bundle.unit-test
+    platform: iOS
+      
+    configFiles:
+      Debug: Configs/UnitTests.xcconfig
+
+    sources:
+      - path: FrameworkOneTests
+
+    dependencies:
+      - target: FrameworkOne
+    

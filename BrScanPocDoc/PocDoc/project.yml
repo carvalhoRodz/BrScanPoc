@@ -1,0 +1,46 @@
+name: PocDoc
+
+options:
+  xcodeVersion: '9999'
+
+configs:
+  Debug: debug
+  Release: release
+configFiles:
+  Debug: Configs/Debug.xcconfig
+  Release: Configs/Release.xcconfig
+
+targets:
+  PocDoc:
+    type: application
+    platform: iOS
+    settings:
+      IPHONEOS_DEPLOYMENT_TARGET: 12.1
+
+    sources: [Sources]
+
+    configFiles:
+      Debug: Configs/Debug.xcconfig
+      Release: Configs/Release.xcconfig
+
+    dependencies:
+      - framework: FrameworkOne.framework
+        implicit: true
+      - framework: FrameworkTwo.framework
+        implicit: true
+      - framework: FrameworkThree.framework
+        implicit: true
+      - framework: IdentityValidation.framework
+        implicit: true
+
+schemes:
+  PocDoc:
+    build:
+      targets:
+        PocDoc: all
+    run:
+      config: Debug
+    profile:
+      config: Debug
+    analyze:
+      config: Debug
